@@ -11,16 +11,11 @@ export interface PersonProps {
     birth_year: string,
     gender: string;
     films: Array<string>;
-    filmArray?: Array<FilmProps>;
 }
 
 function Person(props: any) {
     const person: PersonProps = useSelector((store: any) => {
         return store.person;
-    });
-
-    const films: FilmsProps = useSelector((store: any) => {
-        return store.films;
     });
 
     return (

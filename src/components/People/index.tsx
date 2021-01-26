@@ -61,7 +61,6 @@ function People(props: any) {
                     { ' ' }
                     {people.next &&
                     <a href={'#'} onClick={() => {
-                        // getPeople(people.next)
                         dispatch(getPeopleList(people.next));
                     }}>Next</a>
                     }
