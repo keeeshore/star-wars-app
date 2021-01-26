@@ -1,8 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {FilmProps, FilmsProps} from './index'
 
-const initialFilmState: FilmProps = {  title: '' };
-
 const initialFilmsState: FilmsProps = {};
 
 export const filmsSlice = createSlice({
