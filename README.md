@@ -1,11 +1,13 @@
 Sample Project using React + Redux toolkit.
 
+##### Live App: https://keeeshore.github.io/star-wars-app/
+
 #### Notes
 
 <li> Using CRA and redux setup provided by https://redux-toolkit.js.org for easy startup, building from scratch using webpack is possible but not mentioned in task.
 <li> API for getting list of people https://swapi.dev/api/people/ already contains each persons details, therefore not required to make another API call to fetch person details.
 <li> People, Person and Films are stored as separate states in Redux.
-<li> Showing more than form of async implementions (in People and Film) 
+<li> Showing different apporaches of async implementions (in People and Film) 
 
 
 #### Things to do
