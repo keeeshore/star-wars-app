@@ -1,11 +1,25 @@
 Sample Project using React + Redux toolkit.
 
+#### Notes
+
+<li> Using CRA and redux setup provided by https://redux-toolkit.js.org for easy startup, building from scratch using webpack is possible but not mentioned in task.
+<li> API for getting list of people https://swapi.dev/api/people/ already contains each persons details, therefore not required to make another API call to fetch person details.
+<li> People, Person and Films are stored as separate states in Redux.
+<li> Showing more than form of async implementions (in People and Film) 
 
 
+#### Things to do
+
+<li> Use of axois instead of fetch
+<li> Use of scss
+<li> Test cases for dispatch 
+<li> Show proper loaders,spinners during async calls.
+
+## Installation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 

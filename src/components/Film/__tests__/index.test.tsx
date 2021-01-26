@@ -1,33 +1,31 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { unmountComponentAtNode } from "react-dom";
-import Person from '../index';
+import People, {default as Film} from '../index';
 import { Provider } from 'react-redux';
 import { act } from "react-dom/test-utils";
 import configureStore from "redux-mock-store";
 
 let container: any;
 let store: any;
-const mockPerson1= {
-    name: "test1",
-    birth_year: "19BBY",
-    gender: "male",
-    films: [ "film1", "film2" ]
+const filmResult = {
+    title: "A New Hope",
+    episode_id: 4,
 };
 
 // @ts-ignore
 global.fetch = () => {
     return Promise.resolve({
-        json: () => Promise.resolve(mockPerson1),
+        json: () => Promise.resolve(filmResult),
     })
 };
 const mockStore: any = configureStore([]);
 
-describe("Person", () => {
+describe("Films", () => {
     beforeEach(() => {
         container = document.createElement("div");
         document.body.appendChild(container);
         store = mockStore({
-            person: { films: [] }
+            films: { }
         });
     });
 
@@ -37,41 +35,35 @@ describe("Person", () => {
         container = null;
     });
 
-    it("should render empty Person details", async () => {
+    it("should render", async () => {
         act(() => {
             render(
                 <Provider store={store}>
-                    <Person />
+                    <Film key={0} indexId={0} url={"https://test/film/1"}/>
                 </Provider>,
                 container
             );
         });
         await waitFor(() => {
-            const detailHeader = screen.getByText(/Details section/i);
-            const name = screen.getByText(/Name/i);
-            const birthYear = screen.getByText(/Birth year:/i);
-            expect(detailHeader).toBeInTheDocument();
+            const name = screen.getByText(/Loading/i);
             expect(name).toBeInTheDocument();
-            expect(birthYear).toBeInTheDocument();
         });
     });
-    it("should show a loaded Person's details", async () => {
+    it("should render Film in list", async () => {
         store = mockStore({
-            person: mockPerson1
+            films: { 0: filmResult }
         });
         act(() => {
             render(
                 <Provider store={store}>
-                    <Person />
+                    <Film key={0} indexId={0} url={"https://test/film/1"}/>
                 </Provider>,
                 container
             );
         });
         await waitFor(() => {
-            const name1 = screen.getByText(/Name: test1/i);
-            const birthYear = screen.getByText(/Birth year: 19BBY/i);
-            expect(name1).toBeInTheDocument();
-            expect(birthYear).toBeInTheDocument();
+            const name = screen.getByText(/A New Hope/i);
+            expect(name).toBeInTheDocument();
         });
     });
 });

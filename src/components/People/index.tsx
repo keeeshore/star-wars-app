@@ -1,11 +1,12 @@
 import './styles.css';
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { list } from './people.reducer';
+import { getPeopleList } from './people.reducer';
 import { update } from '../Person/person.reducer';
 import { PersonProps } from '../Person';
 
 export interface PeopleProps {
+    status: string;
     count: number;
     next?: string;
     previous?: string;
@@ -19,23 +20,8 @@ function People(props: any) {
 
     const dispatch = useDispatch();
 
-    const getPeople = async (url?: string) => {
-        console.log(' getPeople : ', url);
-        try {
-            const response = await fetch(url || 'https://swapi.dev/api/people/');
-            const data: PeopleProps = await response.json();
-            console.log('response : ', data);
-            dispatch(list(data));
-        } catch (err: any) {
-            console.error('err : ', err);
-        } finally {
-            console.log('finally : ');
-            // TODO close loader...
-        }
-    };
-
     useEffect(() => {
-        getPeople();
+        dispatch(getPeopleList());
     }, []);
 
     return (
@@ -64,16 +50,19 @@ function People(props: any) {
             <tfoot>
             <tr>
                 <td colSpan={3}>
+                    { people.status }
+                    { ' ' }
                     Pagination: { ' ' }
                     {people.previous &&
                     <a href={'#'} onClick={() => {
-                        getPeople(people.previous)
+                        dispatch(getPeopleList(people.previous));
                     }}>Back</a>
                     }
                     { ' ' }
                     {people.next &&
                     <a href={'#'} onClick={() => {
-                        getPeople(people.next)
+                        // getPeople(people.next)
+                        dispatch(getPeopleList(people.next));
                     }}>Next</a>
                     }
                 </td>

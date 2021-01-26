@@ -4,7 +4,7 @@ import People from '../index';
 import { Provider } from 'react-redux';
 import { act } from "react-dom/test-utils";
 import configureStore from "redux-mock-store";
-import assert from "assert";
+import thunk from 'redux-thunk'
 
 let container: any;
 let store: any;
@@ -32,7 +32,9 @@ global.fetch = () => {
         json: () => Promise.resolve(peopleList),
     })
 };
-const mockStore: any = configureStore([]);
+const middlewares: any = [thunk];
+const mockStore = configureStore(middlewares);
+
 
 describe("People", () => {
     beforeEach(() => {
