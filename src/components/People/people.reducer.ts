@@ -4,7 +4,7 @@ import { PeopleProps } from "./index";
 const initialPeopleState: PeopleProps = { status: 'ready', count: 0, results: [] };
 
 export const getPeopleList = createAsyncThunk('people/getPeopleList', async (url?: string) => {
-    const response = await fetch(url || 'https://swapi.dev/api/people/');
+    const response = await fetch(url && url.replace("http:", "https:") || 'https://swapi.dev/api/people/');
     const data: PeopleProps = await response.json();
     console.log('response : ', data);
     return data;

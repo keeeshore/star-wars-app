@@ -21,7 +21,7 @@ function Film(props: any) {
 
     const getFilm = async (url: string) => {
         try {
-            const response = await fetch(url);
+            const response = await fetch(url.replace("http:", "https:"));
             const data = await response.json();
             setFilm(data);
             dispatch(addToList({indexId: props.indexId, data: data}));
